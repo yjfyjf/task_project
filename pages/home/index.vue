@@ -203,11 +203,11 @@ export default {
 	},
 	beforeCreate() {
 		let line = uni.getStorageSync('line')
-		let userInfo = uni.getStorageSync('userInfo')
+		let userInfo = uni.getStorageSync('userInfo') || {}
 		let params = {
-			avatarUrl: userInfo.fileUrl,
-			userName: userInfo.userName,
-			name: userInfo.name,
+			avatarUrl: userInfo?.fileUrl,
+			userName: userInfo?.userName,
+			name: userInfo?.name,
 			lineId: line.id,
 			code: ''
 		}
@@ -222,7 +222,7 @@ export default {
 	},
 	onShow() {
 		let userInfo = uni.getStorageSync('userInfo')
-		this.role = userInfo.userRole
+		this.role = userInfo?.userRole
 		this.initNotice()
 		this.initTask()
 		this.initTotal()

@@ -60,15 +60,17 @@ const _sfc_main = {
   },
   methods: {
     init() {
-      let userInfo = common_vendor.index.getStorageSync("userInfo");
-      if (userInfo.userRole == "a") {
-        this.tabList = this.tabListFour;
-      } else if (userInfo.userRole == "b") {
-        this.tabList = this.tabListOne;
-      } else if (userInfo.userRole == "c") {
-        this.tabList = this.tabListThree;
-      } else if (userInfo.userRole == "d") {
-        this.tabList = this.tabListTwo;
+      let userInfo = common_vendor.index.getStorageSync("userInfo") || {};
+      if (userInfo && Object.keys(userInfo).length > 0) {
+        if (userInfo.userRole == "a") {
+          this.tabList = this.tabListFour;
+        } else if (userInfo.userRole == "b") {
+          this.tabList = this.tabListOne;
+        } else if (userInfo.userRole == "c") {
+          this.tabList = this.tabListThree;
+        } else if (userInfo.userRole == "d") {
+          this.tabList = this.tabListTwo;
+        }
       }
       if (this.tabListParent.length > 0) {
         this.tabList = this.tabListParent;

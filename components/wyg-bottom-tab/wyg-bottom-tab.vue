@@ -69,15 +69,17 @@ export default {
 	},
 	methods: {
 		init() {
-			let userInfo = uni.getStorageSync('userInfo')
-			if (userInfo.userRole == 'a') { // 管理员
-				this.tabList = this.tabListFour
-			} else if (userInfo.userRole == 'b') { // 话务员
-				this.tabList = this.tabListOne
-			} else if (userInfo.userRole == 'c') { // 话务员经理
-				this.tabList = this.tabListThree
-			} else if (userInfo.userRole == 'd') { // 业务员经理
-				this.tabList = this.tabListTwo
+			let userInfo = uni.getStorageSync('userInfo') || {}
+			if (userInfo && Object.keys(userInfo).length > 0) {
+				if (userInfo.userRole == 'a') { // 管理员
+					this.tabList = this.tabListFour
+				} else if (userInfo.userRole == 'b') { // 话务员
+					this.tabList = this.tabListOne
+				} else if (userInfo.userRole == 'c') { // 话务员经理
+					this.tabList = this.tabListThree
+				} else if (userInfo.userRole == 'd') { // 业务员经理
+					this.tabList = this.tabListTwo
+				}
 			}
 			// this.curTab = new Number(this.tabIndex);
 			if (this.tabListParent.length > 0) {

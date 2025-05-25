@@ -29,11 +29,11 @@ const _sfc_main = {
   },
   beforeCreate() {
     let line = common_vendor.index.getStorageSync("line");
-    let userInfo = common_vendor.index.getStorageSync("userInfo");
+    let userInfo = common_vendor.index.getStorageSync("userInfo") || {};
     let params = {
-      avatarUrl: userInfo.fileUrl,
-      userName: userInfo.userName,
-      name: userInfo.name,
+      avatarUrl: userInfo == null ? void 0 : userInfo.fileUrl,
+      userName: userInfo == null ? void 0 : userInfo.userName,
+      name: userInfo == null ? void 0 : userInfo.name,
       lineId: line.id,
       code: ""
     };
@@ -48,7 +48,7 @@ const _sfc_main = {
   },
   onShow() {
     let userInfo = common_vendor.index.getStorageSync("userInfo");
-    this.role = userInfo.userRole;
+    this.role = userInfo == null ? void 0 : userInfo.userRole;
     this.initNotice();
     this.initTask();
     this.initTotal();
