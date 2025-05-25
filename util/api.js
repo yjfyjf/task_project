@@ -320,7 +320,7 @@ export function deleteMission(data) {
 // 业绩相关列表
 export function performanceList(data) {
 	return request({
-		url: '/performance/list',
+		url: '/performance/listSum',
 		method: 'post',
 		data: data
 	})
@@ -444,7 +444,6 @@ export function getVerifyWord(params) {
 	})
 }
 
-
 // 获取是否为验证口令
 export function getTotalInfo(data) {
 	return request({
@@ -460,5 +459,14 @@ export function deleteUser(params) {
 		url: '/taskUserInfoApi/deleteUser',
 		method: 'get',
 		data: params
+	})
+}
+
+// 获取业绩详情接口
+export function getAllPerformance(data) {
+	return request({
+		url: '/performance/allPerformance',
+		method: 'post',
+		data: data
 	})
 }

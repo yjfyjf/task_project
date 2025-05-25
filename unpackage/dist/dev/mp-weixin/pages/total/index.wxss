@@ -121,7 +121,6 @@
 }
 .pages .contentClass .table .table-todoy .todoy-line .header-item.data-v-8fdbd695 {
   width: 33.33%;
-  font-size: 36rpx;
   margin: auto 0;
   font-size: 28rpx;
 }

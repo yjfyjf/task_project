@@ -52,6 +52,12 @@
   right: 0;
   z-index: 2;
 }
+.pages .contentClass .table .table-header .header-text.data-v-24de663c {
+  width: 60rpx;
+  background: white;
+  padding: 2rpx 20rpx;
+  font-size: 28rpx;
+}
 .pages .contentClass .table .table-header .header-item.data-v-24de663c {
   width: 33.33%;
   font-size: 28rpx;

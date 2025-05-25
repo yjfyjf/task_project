@@ -28,7 +28,8 @@
 		<view class="contentClass">
 			<view class="table">
 				<view class="table-header">
-					<view class="header-item">{{ '总业绩 ' + total }}</view>
+					<view @click="checkAll()" class="header-text">明细</view>
+					<view class="header-item">{{ '总业绩 ' + allAmount }}</view>
 				</view>
 				<scroll-view class="scroll-view" :refresher-triggered="triggered" scroll-y="true" refresher-enabled="{{true}}" :enable-pull-down-refresh="true" refresher-two-level-enabled="{{true}}" @refresherrefresh="downCallback" refresher-two-level-scroll-enabled="{{true}}">
 					<view v-if="dataList && dataList.length > 0" class="table-todoy">
@@ -66,10 +67,10 @@ export default {
 			roleType: 1,
 			timeArray: [],
 			dataList: [],
-			total: '',
 			downOption: {},
 			role: '',
-			triggered: false
+			triggered: false,
+			allAmount: 0
 		}
 	},
 	onShow() {
@@ -118,15 +119,16 @@ export default {
 		async initTotalData() {
 			const _this = this
 			let params = {
-				roleType: this.roleType
+				roleType: this.roleType,
+				type: 'single'
 			}
 			if (this.timeArray.length > 1) {
 				params.startTime = this.timeArray[0] + ' 00:00:00'
 				params.endTime = this.timeArray[1] + ' 23:59:59'
 			}
 			await performanceList(params).then(res => {
-				const dataList = res.data
-				_this.total = 0
+				const dataList = res?.data?.performanceReturnVoList || []
+				this.allAmount = res?.data?.allAmount
 				dataList.sort((a, b) => {
 					if (a.num > b.num) return -1; // a应该排在b前面
 					if (a.num < b.num) return 1;  // a应该排在b后面
@@ -136,14 +138,12 @@ export default {
 				let rank = 0;
 				let prevScore = null;
 				dataList.forEach((player, index) => {
-					_this.total += Number(player.receivedAmount)
 					if (prevScore !== player.num) {
 						rank++; // 新的排名始于当前索引加1
 					}
 					player.rank = rank; // 添加排名属性到每个对象中
 					prevScore = player.num; // 更新prevScore为当前玩家的分数，用于下一次比较
 				});
-				_this.total = _this.total.toFixed(2)
 				_this.dataList = dataList
 
 			})
@@ -160,6 +160,14 @@ export default {
 		addPerformance() {
 			uni.navigateTo({
 				url: './add'
+			})
+		},
+		checkAll() {
+			let params = {
+				type: 'all'
+			}
+			uni.navigateTo({
+				url: './detail?params=' + JSON.stringify(params)
 			})
 		}
 	}
@@ -200,6 +208,12 @@ export default {
 				right: 0;
 				z-index: 2;
 
+				.header-text{
+					width: 60rpx;
+					background: white;
+					padding: 2rpx 20rpx;
+					font-size: 28rpx;
+				}
 				.header-item {
 					width: 33.33%;
 					font-size: 28rpx;

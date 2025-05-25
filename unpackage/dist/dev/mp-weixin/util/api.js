@@ -233,7 +233,7 @@ function deleteMission(data) {
 }
 function performanceList(data) {
   return util_request.request({
-    url: "/performance/list",
+    url: "/performance/listSum",
     method: "post",
     data
   });
@@ -340,6 +340,13 @@ function deleteUser(params) {
     data: params
   });
 }
+function getAllPerformance(data) {
+  return util_request.request({
+    url: "/performance/allPerformance",
+    method: "post",
+    data
+  });
+}
 exports.addCustomerInfo = addCustomerInfo;
 exports.addMissionInfo = addMissionInfo;
 exports.auditStatus = auditStatus;
@@ -354,6 +361,7 @@ exports.editSalesmanInfo = editSalesmanInfo;
 exports.editUserInfo = editUserInfo;
 exports.editWChatInfo = editWChatInfo;
 exports.getAboutMission = getAboutMission;
+exports.getAllPerformance = getAllPerformance;
 exports.getGroupList = getGroupList;
 exports.getHomeTotalData = getHomeTotalData;
 exports.getHomeUserTotalList = getHomeUserTotalList;

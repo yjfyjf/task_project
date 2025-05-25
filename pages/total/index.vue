@@ -388,7 +388,6 @@ export default {
 
 					.header-item {
 						width: 33.33%;
-						font-size: 36rpx;
 						margin: auto 0;
 						font-size: 28rpx;
 

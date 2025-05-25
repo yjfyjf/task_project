@@ -28,12 +28,13 @@ const _sfc_main = {
     };
   },
   beforeCreate() {
+    var _a, _b, _c;
     let line = common_vendor.index.getStorageSync("line");
     let userInfo = common_vendor.index.getStorageSync("userInfo") || {};
     let params = {
-      avatarUrl: userInfo == null ? void 0 : userInfo.fileUrl,
-      userName: userInfo == null ? void 0 : userInfo.userName,
-      name: userInfo == null ? void 0 : userInfo.name,
+      avatarUrl: (_a = userInfo == null ? void 0 : userInfo.userInfo) == null ? void 0 : _a.fileUrl,
+      userName: (_b = userInfo == null ? void 0 : userInfo.userInfo) == null ? void 0 : _b.userName,
+      name: (_c = userInfo == null ? void 0 : userInfo.userInfo) == null ? void 0 : _c.name,
       lineId: line.id,
       code: ""
     };
@@ -47,7 +48,9 @@ const _sfc_main = {
     });
   },
   onShow() {
+    var _a;
     let userInfo = common_vendor.index.getStorageSync("userInfo");
+    this.name = (_a = userInfo == null ? void 0 : userInfo.userInfo) == null ? void 0 : _a.name;
     this.role = userInfo == null ? void 0 : userInfo.userRole;
     this.initNotice();
     this.initTask();
@@ -229,7 +232,7 @@ const _sfc_main = {
     handleAddNotice() {
       const _this = this;
       util_api.getVerifyWord({ word: _this.noticeStr }).then((res) => {
-        common_vendor.index.__f__("log", "at pages/home/index.vue:406", res, "res");
+        common_vendor.index.__f__("log", "at pages/home/index.vue:408", res, "res");
         if (res.code == 200) {
           if (res.data == 1) {
             _this.noticeStr = "";
@@ -262,7 +265,7 @@ const _sfc_main = {
           });
         }
       }).catch((err) => {
-        common_vendor.index.__f__("log", "at pages/home/index.vue:440", err);
+        common_vendor.index.__f__("log", "at pages/home/index.vue:442", err);
       });
     },
     async initTotal() {

@@ -11,10 +11,10 @@ const _sfc_main = {
       roleType: 1,
       timeArray: [],
       dataList: [],
-      total: "",
       downOption: {},
       role: "",
-      triggered: false
+      triggered: false,
+      allAmount: 0
     };
   },
   onShow() {
@@ -63,15 +63,17 @@ const _sfc_main = {
     async initTotalData() {
       const _this = this;
       let params = {
-        roleType: this.roleType
+        roleType: this.roleType,
+        type: "single"
       };
       if (this.timeArray.length > 1) {
         params.startTime = this.timeArray[0] + " 00:00:00";
         params.endTime = this.timeArray[1] + " 23:59:59";
       }
       await util_api.performanceList(params).then((res) => {
-        const dataList = res.data;
-        _this.total = 0;
+        var _a, _b;
+        const dataList = ((_a = res == null ? void 0 : res.data) == null ? void 0 : _a.performanceReturnVoList) || [];
+        this.allAmount = (_b = res == null ? void 0 : res.data) == null ? void 0 : _b.allAmount;
         dataList.sort((a, b) => {
           if (a.num > b.num)
             return -1;
@@ -82,14 +84,12 @@ const _sfc_main = {
         let rank = 0;
         let prevScore = null;
         dataList.forEach((player, index) => {
-          _this.total += Number(player.receivedAmount);
           if (prevScore !== player.num) {
             rank++;
           }
           player.rank = rank;
           prevScore = player.num;
         });
-        _this.total = _this.total.toFixed(2);
         _this.dataList = dataList;
       });
     },
@@ -105,6 +105,14 @@ const _sfc_main = {
     addPerformance() {
       common_vendor.index.navigateTo({
         url: "./add"
+      });
+    },
+    checkAll() {
+      let params = {
+        type: "all"
+      };
+      common_vendor.index.navigateTo({
+        url: "./detail?params=" + JSON.stringify(params)
       });
     }
   }
@@ -149,10 +157,11 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       type: "daterange",
       modelValue: $data.timeArray
     }),
-    h: common_vendor.t("总业绩 " + $data.total),
-    i: $data.dataList && $data.dataList.length > 0
+    h: common_vendor.o(($event) => $options.checkAll()),
+    i: common_vendor.t("总业绩 " + $data.allAmount),
+    j: $data.dataList && $data.dataList.length > 0
   }, $data.dataList && $data.dataList.length > 0 ? {
-    j: common_vendor.f($data.dataList, (item, index, i0) => {
+    k: common_vendor.f($data.dataList, (item, index, i0) => {
       return common_vendor.e({
         a: common_vendor.t(item.name),
         b: [1, 2, 3].includes(item.rank)
@@ -165,16 +174,16 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       });
     })
   } : {}, {
-    k: $data.dataList && $data.dataList.length == 0
+    l: $data.dataList && $data.dataList.length == 0
   }, $data.dataList && $data.dataList.length == 0 ? {} : {}, {
-    l: $data.triggered,
-    m: common_vendor.o((...args) => $options.downCallback && $options.downCallback(...args)),
-    n: $data.role != "b"
+    m: $data.triggered,
+    n: common_vendor.o((...args) => $options.downCallback && $options.downCallback(...args)),
+    o: $data.role != "b"
   }, $data.role != "b" ? {
-    o: common_assets._imports_0$3,
-    p: common_vendor.o((...args) => $options.addPerformance && $options.addPerformance(...args))
+    p: common_assets._imports_0$3,
+    q: common_vendor.o((...args) => $options.addPerformance && $options.addPerformance(...args))
   } : {}, {
-    q: common_vendor.p({
+    r: common_vendor.p({
       id: 5
     })
   });

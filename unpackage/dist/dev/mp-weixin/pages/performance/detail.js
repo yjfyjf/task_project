@@ -16,12 +16,20 @@ const _sfc_main = {
   },
   onLoad(option) {
     this.params = JSON.parse(option.params);
-    this.getTotalDetailData();
+    if (this.params.type == "all") {
+      this.getAllPerformance();
+    } else if (this.params.type == "single") {
+      this.getTotalDetailData();
+    }
   },
   methods: {
     async downCallback() {
       this.triggered = true;
-      await this.getTotalDetailData();
+      if (this.params.type == "all") {
+        await this.getAllPerformance();
+      } else if (this.params.type == "single") {
+        await this.getTotalDetailData();
+      }
       this.triggered = false;
     },
     async getTotalDetailData() {
@@ -41,6 +49,26 @@ const _sfc_main = {
           }
         });
         _this.dataList = dataList;
+      });
+    },
+    async getAllPerformance() {
+      const _this = this;
+      let params = {
+        page: 1,
+        pageSize: 9999
+      };
+      await util_api.getAllPerformance(params).then((res) => {
+        _this.total = 0;
+        if (res.code == 200) {
+          const dataList = res.data.records || [];
+          dataList.forEach((i) => {
+            i.time = i.createTime.substring(5, 16);
+            if (_this.isNumber(i.receivedAmount)) {
+              _this.total = _this.total + Number(i.receivedAmount);
+            }
+          });
+          _this.dataList = dataList;
+        }
       });
     },
     isNumber(value) {
