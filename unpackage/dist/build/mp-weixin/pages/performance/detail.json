@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "业绩详情",
+  "usingComponents": {
+    "no-data": "../component/noData",
+    "uni-popup": "../../uni_modules/uni-popup/components/uni-popup/uni-popup",
+    "mescroll-body": "../../uni_modules/mescroll-uni/components/mescroll-body/mescroll-body"
+  }
+}

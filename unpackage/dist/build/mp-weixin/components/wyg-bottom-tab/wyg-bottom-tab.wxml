@@ -1,0 +1,1 @@
+<view class="bottom-tab"><view wx:for="{{a}}" wx:for-item="item" wx:key="h" class="bottom-tab-item" bindtap="{{item.g}}"><image wx:if="{{item.a}}" class="first-img" src="{{item.b}}"></image><image wx:if="{{item.c}}" class="first-img" src="{{item.d}}"></image><text class="{{item.f}}">{{item.e}}</text></view></view>

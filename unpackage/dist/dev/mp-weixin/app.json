@@ -1,0 +1,69 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/index/index",
+    "pages/user/index",
+    "pages/wxChat/index",
+    "pages/login/index",
+    "pages/group/index",
+    "pages/salesman/index",
+    "pages/mainInfo/index",
+    "pages/total/index",
+    "pages/mine/index",
+    "pages/task/index",
+    "pages/total/detail",
+    "pages/total/taskDetail",
+    "pages/performance/index",
+    "pages/performance/add",
+    "pages/performance/detail",
+    "pages/totalAll/index"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#333",
+    "selectedColor": "#d81e06",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "custom": true,
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "iconPath": "static/home.png",
+        "selectedIconPath": "static/home_checked.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/performance/index",
+        "iconPath": "static/performance.png",
+        "selectedIconPath": "static/performance_checked.png",
+        "visible": false,
+        "text": "业绩"
+      },
+      {
+        "pagePath": "pages/wxChat/index",
+        "iconPath": "static/wxChat.png",
+        "selectedIconPath": "static/wxChat_checked.png",
+        "visible": false,
+        "text": "微信"
+      },
+      {
+        "pagePath": "pages/total/index",
+        "iconPath": "static/total.png",
+        "selectedIconPath": "static/total_checked.png",
+        "text": "统计"
+      },
+      {
+        "pagePath": "pages/mine/index",
+        "iconPath": "static/mine.png",
+        "selectedIconPath": "static/mine_checked.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

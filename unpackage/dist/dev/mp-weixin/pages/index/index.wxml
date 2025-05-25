@@ -1,0 +1,1 @@
+<view class="content"><uni-indexed-list wx:if="{{b}}" bindclick="{{a}}" u-i="26267135-0" bind:__l="__l" u-p="{{b}}"></uni-indexed-list></view>
