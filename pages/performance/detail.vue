@@ -1,16 +1,18 @@
 <template>
 	<view class="pages">
+		<view class="header">
+			<view class="allTotal">{{ '总业绩' + total }}</view>
+			<view class="table-header">
+				<view class="table-item">业绩</view>
+				<view class="table-item">添加时间</view>
+				<view class="table-item">话务员</view>
+				<view class="table-item">业务员</view>
+				<view class="table-item">来源</view>
+				<view class="table-item">微信</view>
+			</view>
+		</view>
 		<scroll-view class="scroll-view" :refresher-triggered="triggered" scroll-y="true" refresher-enabled="{{true}}" :enable-pull-down-refresh="true" refresher-two-level-enabled="{{true}}" @refresherrefresh="downCallback" refresher-two-level-scroll-enabled="{{true}}">
-			<div class="allTotal">{{ '总业绩' + total }}</div>
 			<view ref="table">
-				<view class="table-header">
-					<view class="table-item">业绩</view>
-					<view class="table-item">添加时间</view>
-					<view class="table-item">话务员</view>
-					<view class="table-item">业务员</view>
-					<view class="table-item">来源</view>
-					<view class="table-item">微信</view>
-				</view>
 				<view v-if="dataList && dataList.length > 0">
 					<view class="table-tbody">
 						<view v-for="(item, index) in dataList" :key="index" @click="deleteHander(item)" class="line-item">
@@ -156,64 +158,69 @@ export default {
 
 <style lang="scss" scoped>
 .pages {
-	.scroll-view {
-		padding-bottom: 120rpx;
-		overflow-y: auto;
+	.header {
 		position: fixed;
 		left: 0;
 		right: 0;
 		top: 0;
+		.allTotal {
+			font-size: 32rpx;
+			padding: 24rpx 0;
+			text-align: center;
+		}
+
+		.table-header {
+			display: flex;
+			width: 100%;
+			background: #e5e5e5;
+			color: #656565;
+			font-size: 28rpx;
+			padding: 14rpx 12rpx;
+			box-sizing: border-box;
+
+			.table-item {
+				// white-space: nowrap;
+				text-align: center;
+
+				&:first-child {
+					width: 20%;
+				}
+
+				&:nth-child(2) {
+					width: 25%;
+				}
+
+				&:nth-child(3) {
+					width: 15%;
+				}
+
+				&:nth-child(4) {
+					width: 15%;
+				}
+
+				&:nth-child(5) {
+					width: 15%;
+				}
+
+				&:nth-child(6) {
+					width: 15%;
+				}
+			}
+		}
+	}
+
+	.scroll-view {
+		overflow-y: auto;
+		position: fixed;
+		left: 0;
+		right: 0;
+		top: 176rpx;
 		bottom: 0;
 
 		.table {
 			overflow-y: auto;
 		}
 
-	}
-
-	.allTotal {
-		font-size: 32rpx;
-		padding: 24rpx 0;
-		text-align: center;
-	}
-
-	.table-header {
-		display: flex;
-		width: 100%;
-		background: #e5e5e5;
-		color: #656565;
-		font-size: 28rpx;
-		padding: 14rpx 12rpx;
-		box-sizing: border-box;
-
-		.table-item {
-			// white-space: nowrap;
-			text-align: center;
-
-			&:first-child {
-				width: 10%;
-			}
-
-			&:nth-child(2) {
-				width: 25%;
-			}
-
-			&:nth-child(3) {
-				width: 15%;
-			}
-
-			&:nth-child(4) {
-				width: 15%;
-			}
-
-			&:nth-child(5) {
-				width: 25%;
-			}
-
-			&:nth-child(6) {
-				width: 15%;
-			}
-		}
 	}
 
 	.none-data {
@@ -259,6 +266,7 @@ export default {
 
 			.name-text {
 				margin: auto 0;
+				white-space: nowrap;
 			}
 
 			.right-img {
@@ -275,7 +283,7 @@ export default {
 			word-break: break-all;
 
 			&:first-child {
-				width: 10%;
+				width: 20%;
 			}
 
 			&:nth-child(2) {
@@ -291,7 +299,7 @@ export default {
 			}
 
 			&:nth-child(5) {
-				width: 25%;
+				width: 15%;
 			}
 
 			&:nth-child(6) {
