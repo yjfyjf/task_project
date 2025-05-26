@@ -170,6 +170,7 @@ const _sfc_main = {
           }
         });
         this.mineMissionList = mineMissionList;
+        this.isOpened = "left";
         this.missionName = this.mineMissionList && this.mineMissionList.length > 0 ? this.mineMissionList[0].missionName : "--";
         this.$nextTick(() => {
           this.$refs.collapse.resize();
@@ -237,8 +238,8 @@ const _sfc_main = {
       this.isShow = true;
     },
     sortClick(e) {
-      common_vendor.index.__f__("log", "at pages/task/index.vue:390", e, "添加数");
-      common_vendor.index.__f__("log", "at pages/task/index.vue:391", this.sort, "未被添加数");
+      common_vendor.index.__f__("log", "at pages/task/index.vue:391", e, "添加数");
+      common_vendor.index.__f__("log", "at pages/task/index.vue:392", this.sort, "未被添加数");
       if (e == 1 || e == 2) {
         this.current = 1;
         this.wChatList = [];
@@ -254,15 +255,15 @@ const _sfc_main = {
       }
     },
     addTypeClick(e) {
-      common_vendor.index.__f__("log", "at pages/task/index.vue:407", e, "今日添加数");
-      common_vendor.index.__f__("log", "at pages/task/index.vue:408", this.addType, "未被添加数");
+      common_vendor.index.__f__("log", "at pages/task/index.vue:408", e, "今日添加数");
+      common_vendor.index.__f__("log", "at pages/task/index.vue:409", this.addType, "未被添加数");
       this.current = 1;
       this.wChatList = [];
       this.getWChatList();
     },
     dataTypeClick(e) {
-      common_vendor.index.__f__("log", "at pages/task/index.vue:414", e, "未被添加数");
-      common_vendor.index.__f__("log", "at pages/task/index.vue:415", this.dataType, "未被添加数");
+      common_vendor.index.__f__("log", "at pages/task/index.vue:415", e, "未被添加数");
+      common_vendor.index.__f__("log", "at pages/task/index.vue:416", this.dataType, "未被添加数");
       this.current = 1;
       this.wChatList = [];
       this.getWChatList();

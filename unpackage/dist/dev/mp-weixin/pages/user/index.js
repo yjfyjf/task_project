@@ -134,6 +134,7 @@ const _sfc_main = {
         if (this.dataType == 1) {
           this.userInfoList = res.data.records;
           this.total = res.data.total;
+          this.isOpened = "left";
         } else {
           this.userInfoList = res.data;
         }
@@ -178,7 +179,7 @@ const _sfc_main = {
               }
             });
           } else {
-            common_vendor.index.__f__("log", "at pages/user/index.vue:359", "取消");
+            common_vendor.index.__f__("log", "at pages/user/index.vue:360", "取消");
           }
         }
       });

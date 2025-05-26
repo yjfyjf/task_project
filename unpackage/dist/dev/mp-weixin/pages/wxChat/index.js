@@ -68,8 +68,8 @@ const _sfc_main = {
         searchStr: this.searchStr,
         statusFlag: this.searchStatus
       }).then((res) => {
-        this.wChatList = res.data.records || [];
-        this.total = res.data.total;
+        this.wChatList = [...res.data.records];
+        this.isOpened = "left", this.total = res.data.total;
         this.loading = false;
       });
     },
@@ -147,7 +147,7 @@ const _sfc_main = {
               }
             });
           } else {
-            common_vendor.index.__f__("log", "at pages/wxChat/index.vue:286", "取消");
+            common_vendor.index.__f__("log", "at pages/wxChat/index.vue:287", "取消");
           }
         }
       });

@@ -19,7 +19,7 @@ const _sfc_main = {
   },
   onShow() {
     let userInfo = common_vendor.index.getStorageSync("userInfo");
-    this.role = userInfo.userRole;
+    this.role = userInfo == null ? void 0 : userInfo.userRole;
     this.initDate();
     this.initTotalData();
   },
@@ -157,11 +157,14 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       type: "daterange",
       modelValue: $data.timeArray
     }),
-    h: common_vendor.o(($event) => $options.checkAll()),
-    i: common_vendor.t("总业绩 " + $data.allAmount),
-    j: $data.dataList && $data.dataList.length > 0
+    h: $data.role == "a"
+  }, $data.role == "a" ? {
+    i: common_vendor.o(($event) => $options.checkAll())
+  } : {}, {
+    j: common_vendor.t("总业绩 " + $data.allAmount),
+    k: $data.dataList && $data.dataList.length > 0
   }, $data.dataList && $data.dataList.length > 0 ? {
-    k: common_vendor.f($data.dataList, (item, index, i0) => {
+    l: common_vendor.f($data.dataList, (item, index, i0) => {
       return common_vendor.e({
         a: common_vendor.t(item.name),
         b: [1, 2, 3].includes(item.rank)
@@ -174,16 +177,16 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       });
     })
   } : {}, {
-    l: $data.dataList && $data.dataList.length == 0
+    m: $data.dataList && $data.dataList.length == 0
   }, $data.dataList && $data.dataList.length == 0 ? {} : {}, {
-    m: $data.triggered,
-    n: common_vendor.o((...args) => $options.downCallback && $options.downCallback(...args)),
-    o: $data.role != "b"
+    n: $data.triggered,
+    o: common_vendor.o((...args) => $options.downCallback && $options.downCallback(...args)),
+    p: $data.role != "b"
   }, $data.role != "b" ? {
-    p: common_assets._imports_0$3,
-    q: common_vendor.o((...args) => $options.addPerformance && $options.addPerformance(...args))
+    q: common_assets._imports_0$3,
+    r: common_vendor.o((...args) => $options.addPerformance && $options.addPerformance(...args))
   } : {}, {
-    r: common_vendor.p({
+    s: common_vendor.p({
       id: 5
     })
   });

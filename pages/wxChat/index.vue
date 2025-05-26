@@ -203,7 +203,8 @@ export default {
 				searchStr: this.searchStr,
 				statusFlag: this.searchStatus
 			}).then(res => {
-				this.wChatList = res.data.records || []
+				this.wChatList = [...res.data.records] || []
+				this.isOpened = 'left'
 				this.total = res.data.total
 				this.loading = false
 			})

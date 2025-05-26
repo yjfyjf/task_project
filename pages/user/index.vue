@@ -311,6 +311,7 @@ export default {
 				if (this.dataType == 1) {
 					this.userInfoList = res.data.records
 					this.total = res.data.total
+					this.isOpened = 'left'
 				} else {
 					this.userInfoList = res.data
 				}

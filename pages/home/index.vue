@@ -246,9 +246,6 @@ export default {
 		}
 	},
 	methods: {
-		handleLogin() {
-
-		},
 		loginOut() {
 			uni.removeStorageSync('line')
 			uni.removeStorageSync('userInfo')

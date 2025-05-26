@@ -45,7 +45,7 @@
 		<view class="contentClass">
 			<view class="table">
 				<view class="table-header">
-					<view @click="checkAll()" class="header-item">
+					<view v-show="role != 'a'" @click="checkAll()" class="header-item">
 						<view class="text">明细</view>
 					</view>
 					<view class="header-item">{{ '邀请 ' + total }}</view>
@@ -107,14 +107,18 @@ export default {
 			detail: {},
 			startTimeDom: '',
 			endTimesDom: '',
-			triggered: false
+			triggered: false,
+			role: ''
 		}
 	},
 	onLoad() {
 	},
 	onShow() {
+		let userInfo = uni.getStorageSync('userInfo')
+		this.role = userInfo?.userRole
 		this.initDate()
 		this.initTotalData()
+		
 	},
 	methods: {
 		async downCallback() {

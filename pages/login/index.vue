@@ -64,28 +64,10 @@ export default {
 					let userInfo = loginRes.data[0]
 					this.userName = userInfo.userName
 					this.name = userInfo.name
-					if (userInfo.statusFlag == 3) {
+					if (userInfo.statusFlag == 3 || userInfo.checkFlag == 0 || userInfo.checkFlag == 2) {
 						this.disabled = true
 						uni.showToast({
-							title: '该账号已离职，无法登录',
-							icon: 'none',
-							mask: true
-						})
-						return
-					}
-					if (userInfo.checkFlag == 0) {
-						this.disabled = true
-						uni.showToast({
-							title: '该账号待审核，请等待管理员审核',
-							icon: 'none',
-							mask: true
-						})
-						return
-					}
-					if (userInfo.checkFlag == 2) {
-						this.disabled = true
-						uni.showToast({
-							title: '该账号审核不通过',
+							title: userInfo.statusFlag == 3 ? '该账号已离职，无法登录' : (userInfo.checkFlag == 0 ? '该账号待审核，请等待管理员审核' : (userInfo.checkFlag == 2 ? '该账号审核不通过' : '')),
 							icon: 'none',
 							mask: true
 						})

@@ -28,7 +28,7 @@
 		<view class="contentClass">
 			<view class="table">
 				<view class="table-header">
-					<view @click="checkAll()" class="header-text">明细</view>
+					<view v-if="role == 'a'" @click="checkAll()" class="header-text">明细</view>
 					<view class="header-item">{{ '总业绩 ' + allAmount }}</view>
 				</view>
 				<scroll-view class="scroll-view" :refresher-triggered="triggered" scroll-y="true" refresher-enabled="{{true}}" :enable-pull-down-refresh="true" refresher-two-level-enabled="{{true}}" @refresherrefresh="downCallback" refresher-two-level-scroll-enabled="{{true}}">
@@ -70,12 +70,12 @@ export default {
 			downOption: {},
 			role: '',
 			triggered: false,
-			allAmount: 0
+			allAmount: 0,
 		}
 	},
 	onShow() {
 		let userInfo = uni.getStorageSync('userInfo')
-		this.role = userInfo.userRole
+		this.role = userInfo?.userRole
 		this.initDate()
 		this.initTotalData()
 	},

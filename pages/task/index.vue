@@ -320,6 +320,7 @@ export default {
 					}
 				});
 				this.mineMissionList = mineMissionList
+				this.isOpened = 'left'
 				this.missionName = (this.mineMissionList && this.mineMissionList.length > 0) ? this.mineMissionList[0].missionName : '--'
 				this.$nextTick(() => {
 					this.$refs.collapse.resize()

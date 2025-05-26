@@ -73,8 +73,6 @@ const _sfc_main = {
     }
   },
   methods: {
-    handleLogin() {
-    },
     loginOut() {
       common_vendor.index.removeStorageSync("line");
       common_vendor.index.removeStorageSync("userInfo");
@@ -232,7 +230,7 @@ const _sfc_main = {
     handleAddNotice() {
       const _this = this;
       util_api.getVerifyWord({ word: _this.noticeStr }).then((res) => {
-        common_vendor.index.__f__("log", "at pages/home/index.vue:408", res, "res");
+        common_vendor.index.__f__("log", "at pages/home/index.vue:405", res, "res");
         if (res.code == 200) {
           if (res.data == 1) {
             _this.noticeStr = "";
@@ -265,7 +263,7 @@ const _sfc_main = {
           });
         }
       }).catch((err) => {
-        common_vendor.index.__f__("log", "at pages/home/index.vue:442", err);
+        common_vendor.index.__f__("log", "at pages/home/index.vue:439", err);
       });
     },
     async initTotal() {

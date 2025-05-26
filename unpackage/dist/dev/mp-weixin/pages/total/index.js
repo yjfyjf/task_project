@@ -16,12 +16,15 @@ const _sfc_main = {
       detail: {},
       startTimeDom: "",
       endTimesDom: "",
-      triggered: false
+      triggered: false,
+      role: ""
     };
   },
   onLoad() {
   },
   onShow() {
+    let userInfo = common_vendor.index.getStorageSync("userInfo");
+    this.role = userInfo == null ? void 0 : userInfo.userRole;
     this.initDate();
     this.initTotalData();
   },
@@ -235,12 +238,13 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       clear: false,
       modelValue: $data.listType
     }),
-    k: common_vendor.o(($event) => $options.checkAll()),
-    l: common_vendor.t("邀请 " + $data.total),
-    m: common_vendor.t("新增 " + $data.addTotal),
-    n: $data.dataList && $data.dataList.length > 0
+    k: $data.role != "a",
+    l: common_vendor.o(($event) => $options.checkAll()),
+    m: common_vendor.t("邀请 " + $data.total),
+    n: common_vendor.t("新增 " + $data.addTotal),
+    o: $data.dataList && $data.dataList.length > 0
   }, $data.dataList && $data.dataList.length > 0 ? {
-    o: common_vendor.f($data.dataList, (item, index, i0) => {
+    p: common_vendor.f($data.dataList, (item, index, i0) => {
       return common_vendor.e({
         a: common_vendor.t(item.name),
         b: common_vendor.t(item.num),
@@ -255,18 +259,18 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
       });
     })
   } : {}, {
-    p: $data.dataList && $data.dataList.length == 0
+    q: $data.dataList && $data.dataList.length == 0
   }, $data.dataList && $data.dataList.length == 0 ? {} : {}, {
-    q: $data.triggered,
-    r: common_vendor.o((...args) => $options.downCallback && $options.downCallback(...args)),
-    s: common_vendor.o((...args) => $options.remoDetail && $options.remoDetail(...args)),
-    t: common_vendor.o((...args) => $options.remoTask && $options.remoTask(...args)),
-    v: common_vendor.o((...args) => $options.close && $options.close(...args)),
-    w: common_vendor.sr("popup", "8fdbd695-4"),
-    x: common_vendor.p({
+    r: $data.triggered,
+    s: common_vendor.o((...args) => $options.downCallback && $options.downCallback(...args)),
+    t: common_vendor.o((...args) => $options.remoDetail && $options.remoDetail(...args)),
+    v: common_vendor.o((...args) => $options.remoTask && $options.remoTask(...args)),
+    w: common_vendor.o((...args) => $options.close && $options.close(...args)),
+    x: common_vendor.sr("popup", "8fdbd695-4"),
+    y: common_vendor.p({
       type: "bottom"
     }),
-    y: common_vendor.p({
+    z: common_vendor.p({
       id: 2
     })
   });
