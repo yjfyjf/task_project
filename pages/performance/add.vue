@@ -119,22 +119,30 @@ export default {
         },
         getTaskList() {
             getTaskList().then(res => {
+                let taskList = []
                 res.data && res.data.length > 0 && res.data.forEach(i => {
-                    this.taskList.push({
+                    taskList.push({
                         text: i.name,
                         value: i.id
                     })
                 });
+                this.$nextTick(() => {
+                    this.taskList = taskList
+                })
             })
         },
         getUserInfo() {
             getUserInfo({ lineId: this.lineObj.id }).then(res => {
+                let roleList = []
                 res.data && res.data.length > 0 && res.data.forEach(i => {
-                    this.roleList.push({
+                    roleList.push({
                         text: i.name,
                         value: i.id
                     })
                 });
+                this.$nextTick(() => {
+                    this.roleList = roleList
+                })
             })
         },
         getWChatDataList() {
@@ -143,13 +151,17 @@ export default {
                 size: 2000,
             }).then(res => {
                 const wChatList = res.data.records || []
+                let chatList = []
                 wChatList && wChatList.length > 0 && wChatList.forEach(i => {
-                    this.wChatList.push({
+                    chatList.push({
                         text: i.code,
                         value: i.id,
                         userName: i.userName
                     })
                 });
+                this.$nextTick(() => {
+                    this.wChatList = chatList
+                })
             })
         },
         codeChange(e) {
