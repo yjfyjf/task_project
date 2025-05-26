@@ -69,7 +69,8 @@ const _sfc_main = {
         statusFlag: this.searchStatus
       }).then((res) => {
         this.wChatList = [...res.data.records];
-        this.isOpened = "left", this.total = res.data.total;
+        this.isOpened = "left";
+        this.total = res.data.total;
         this.loading = false;
       });
     },
