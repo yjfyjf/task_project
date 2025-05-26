@@ -77,7 +77,7 @@ const _sfc_main = {
       };
       common_vendor.wx$1.login({
         success: async (res) => {
-          common_vendor.index.__f__("log", "at pages/login/index.vue:113", res);
+          common_vendor.index.__f__("log", "at pages/login/index.vue:112", res);
           params.code = res.code;
           const loginRes = await util_api.wxLogin(params);
           that.loginShow(loginRes.data);

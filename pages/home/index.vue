@@ -175,7 +175,7 @@ import MescrollMixin from "@/uni_modules/mescroll-uni/components/mescroll-uni/me
 
 import tab from "../../components/wyg-bottom-tab/wyg-bottom-tab.vue";
 
-import { getNoticeInfo, wxLogin, editNoticeInfo, getTask, createTask, getHomeTotalData, getHomeUserTotalList, getVerifyWord } from '@/util/api'
+import { getNoticeInfo, wxLogin, editNoticeInfo, getTask, createTask, getHomeTotalData, getHomeUserTotalList, getVerifyWord, testUserInfo } from '@/util/api'
 
 export default {
 	mixins: [MescrollMixin], // 使用mixin
@@ -203,21 +203,33 @@ export default {
 	},
 	beforeCreate() {
 		let line = uni.getStorageSync('line')
-		let userInfo = uni.getStorageSync('userInfo') || {}
-		let params = {
-			avatarUrl: userInfo?.userInfo?.fileUrl,
-			userName: userInfo?.userInfo?.userName,
-			name: userInfo?.userInfo?.name,
-			lineId: line.id,
-			code: ''
-		}
+		let userInfo = {}
 		wx.login({
 			success: async (res) => {
-				console.log(res);
-				params.code = res.code
-				const loginRes = await wxLogin(params)
-				uni.setStorageSync('userInfo', loginRes.data)
-			}
+				const loginRes = await testUserInfo({ code: res.code, lineId: line.id })
+				userInfo = loginRes.data[0]
+				if (loginRes && Object.keys(loginRes).length > 0 && userInfo.statusFlag == 1) {
+					let params = {
+						avatarUrl: userInfo?.fileUrl,
+						userName: userInfo?.userName,
+						name: userInfo?.name,
+						lineId: line.id,
+						code: ''
+					}
+					wx.login({
+						success: async (resData) => {
+							params.code = resData.code
+							const userRes = await wxLogin(params)
+							uni.setStorageSync('userInfo', userRes.data)
+						}
+					})
+				}
+			},
+			complete() {
+				uni.hideLoading({
+					noConflict: true,
+				});
+			},
 		})
 	},
 	onShow() {
@@ -228,7 +240,7 @@ export default {
 		this.initTask()
 		this.initTotal()
 		this.getUserTotal()
-		
+
 	},
 	watch: {
 		tyleSelect() {
@@ -477,6 +489,7 @@ export default {
 		height: 100%;
 		overflow: auto;
 		position: fixed;
+
 		.headerClass {
 			background: linear-gradient(to bottom, #a87053, white);
 			padding: 34rpx 34rpx 0 34rpx;

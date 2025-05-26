@@ -102,7 +102,8 @@ export default {
 		checkDetail(item) {
 			let params = {
 				id: item.id,
-				roleType: this.roleType
+				roleType: this.roleType,
+				type: 'single'
 			}
 			if (this.timeArray.length > 1) {
 				params.startTime = this.timeArray[0]
@@ -120,7 +121,6 @@ export default {
 			const _this = this
 			let params = {
 				roleType: this.roleType,
-				type: 'single'
 			}
 			if (this.timeArray.length > 1) {
 				params.startTime = this.timeArray[0] + ' 00:00:00'

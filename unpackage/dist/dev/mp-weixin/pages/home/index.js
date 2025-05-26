@@ -28,22 +28,33 @@ const _sfc_main = {
     };
   },
   beforeCreate() {
-    var _a, _b, _c;
     let line = common_vendor.index.getStorageSync("line");
-    let userInfo = common_vendor.index.getStorageSync("userInfo") || {};
-    let params = {
-      avatarUrl: (_a = userInfo == null ? void 0 : userInfo.userInfo) == null ? void 0 : _a.fileUrl,
-      userName: (_b = userInfo == null ? void 0 : userInfo.userInfo) == null ? void 0 : _b.userName,
-      name: (_c = userInfo == null ? void 0 : userInfo.userInfo) == null ? void 0 : _c.name,
-      lineId: line.id,
-      code: ""
-    };
+    let userInfo = {};
     common_vendor.wx$1.login({
       success: async (res) => {
-        common_vendor.index.__f__("log", "at pages/home/index.vue:216", res);
-        params.code = res.code;
-        const loginRes = await util_api.wxLogin(params);
-        common_vendor.index.setStorageSync("userInfo", loginRes.data);
+        const loginRes = await util_api.testUserInfo({ code: res.code, lineId: line.id });
+        userInfo = loginRes.data[0];
+        if (loginRes && Object.keys(loginRes).length > 0 && userInfo.statusFlag == 1) {
+          let params = {
+            avatarUrl: userInfo == null ? void 0 : userInfo.fileUrl,
+            userName: userInfo == null ? void 0 : userInfo.userName,
+            name: userInfo == null ? void 0 : userInfo.name,
+            lineId: line.id,
+            code: ""
+          };
+          common_vendor.wx$1.login({
+            success: async (resData) => {
+              params.code = resData.code;
+              const userRes = await util_api.wxLogin(params);
+              common_vendor.index.setStorageSync("userInfo", userRes.data);
+            }
+          });
+        }
+      },
+      complete() {
+        common_vendor.index.hideLoading({
+          noConflict: true
+        });
       }
     });
   },
@@ -230,7 +241,7 @@ const _sfc_main = {
     handleAddNotice() {
       const _this = this;
       util_api.getVerifyWord({ word: _this.noticeStr }).then((res) => {
-        common_vendor.index.__f__("log", "at pages/home/index.vue:405", res, "res");
+        common_vendor.index.__f__("log", "at pages/home/index.vue:417", res, "res");
         if (res.code == 200) {
           if (res.data == 1) {
             _this.noticeStr = "";
@@ -263,7 +274,7 @@ const _sfc_main = {
           });
         }
       }).catch((err) => {
-        common_vendor.index.__f__("log", "at pages/home/index.vue:439", err);
+        common_vendor.index.__f__("log", "at pages/home/index.vue:451", err);
       });
     },
     async initTotal() {

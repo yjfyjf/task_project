@@ -81,7 +81,6 @@ export default {
 					});
 				},
 			})
-			
 		},
 		getUserName(data) {
 			this.userName = data.detail.value
