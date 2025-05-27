@@ -81,17 +81,24 @@ const request = (params) => {
               });
               break;
             case 500:
-              common_vendor.index.showToast({
-                title: res.data.error,
-                icon: "none",
-                mask: true
-              });
-              break;
+              if (res.data.error == "请先登录") {
+                common_vendor.index.reLaunch({
+                  url: "/pages/index/index"
+                });
+                break;
+              } else {
+                common_vendor.index.showToast({
+                  title: res.data.error,
+                  icon: "none",
+                  mask: true
+                });
+                break;
+              }
           }
         }
       },
       fail(err) {
-        common_vendor.index.__f__("log", "at util/request.js:118", err);
+        common_vendor.index.__f__("log", "at util/request.js:126", err);
         if (err.errMsg.indexOf("request:fail") !== -1) {
           common_vendor.index.showToast({
             title: "网络异常",

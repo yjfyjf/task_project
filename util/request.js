@@ -38,9 +38,9 @@ export default (params) => {
         if (res.statusCode == 200) {
           resolve(res.data);
         } else {
-          let userInfo = uni.getStorageSync("userInfo")
-          console.log(userInfo,'userInfo');
-          if ((userInfo && Object.keys(userInfo).length == 0) || !userInfo ) {
+          let userInfo = uni.getStorageSync("userInfo");
+          console.log(userInfo, "userInfo");
+          if ((userInfo && Object.keys(userInfo).length == 0) || !userInfo) {
             uni.showModal({
               title: "提示",
               content: "请重新登录",
@@ -54,7 +54,7 @@ export default (params) => {
                 }, 500);
               },
             });
-            return
+            return;
           }
           switch (res.statusCode) {
             case 401:
@@ -89,12 +89,20 @@ export default (params) => {
               });
               break;
             case 500:
-              uni.showToast({
-                title: res.data.error,
-                icon: "none",
-                mask: true,
-              });
-              break;
+              if (res.data.error == "请先登录") {
+                uni.reLaunch({
+                  url: "/pages/index/index",
+                });
+                break;
+              } else {
+                uni.showToast({
+                  title: res.data.error,
+                  icon: "none",
+                  mask: true,
+                });
+                break;
+              }
+
             default:
               // uni.removeStorageSync("userInfo");
               // uni.showModal({
