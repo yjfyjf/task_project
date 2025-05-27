@@ -98,7 +98,7 @@ const request = (params) => {
         }
       },
       fail(err) {
-        common_vendor.index.__f__("log", "at util/request.js:126", err);
+        common_vendor.index.__f__("log", "at util/request.js:125", err);
         if (err.errMsg.indexOf("request:fail") !== -1) {
           common_vendor.index.showToast({
             title: "网络异常",

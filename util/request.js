@@ -102,7 +102,6 @@ export default (params) => {
                 });
                 break;
               }
-
             default:
               // uni.removeStorageSync("userInfo");
               // uni.showModal({
