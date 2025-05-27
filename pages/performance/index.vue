@@ -166,6 +166,10 @@ export default {
 			let params = {
 				type: 'all'
 			}
+			if (this.timeArray.length > 1) {
+				params.startTime = this.timeArray[0]
+				params.endTime = this.timeArray[1]
+			}
 			uni.navigateTo({
 				url: './detail?params=' + JSON.stringify(params)
 			})

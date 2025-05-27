@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "我的",
-  "usingComponents": {
-    "tab": "../../components/wyg-bottom-tab/wyg-bottom-tab",
-    "uni-card": "../../uni_modules/uni-card/components/uni-card/uni-card",
-    "uni-popup": "../../uni_modules/uni-popup/components/uni-popup/uni-popup"
-  }
-}

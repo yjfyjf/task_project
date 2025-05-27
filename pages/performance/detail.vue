@@ -109,7 +109,9 @@ export default {
 			const _this = this
 			let params = {
 				page: 1,
-				pageSize: 9999
+				pageSize: 9999,
+				startTime: _this.params.startTime + ' 00:00:00',
+				endTime: _this.params.endTime + ' 23:59:59',
 			}
 			await getAllPerformance(params).then(res => {
 				_this.total = 0

@@ -1,9 +1,0 @@
-{
-  "navigationBarTitleText": "业绩统计",
-  "usingComponents": {
-    "no-data": "../component/noData",
-    "tab": "../../components/wyg-bottom-tab/wyg-bottom-tab",
-    "uni-data-select": "../../uni_modules/uni-data-select/components/uni-data-select/uni-data-select",
-    "uni-datetime-picker": "../../uni_modules/uni-datetime-picker/components/uni-datetime-picker/uni-datetime-picker"
-  }
-}
