@@ -28,10 +28,26 @@ const request = (params) => {
       success(response) {
         const res = response;
         if (res.statusCode == 200) {
-          resolve(res.data);
+          if (res.data.code == 402) {
+            common_vendor.index.showToast({
+              title: "登录过期，请重新登陆",
+              icon: "none",
+              mask: true
+            });
+            common_vendor.index.removeStorageSync("userInfo");
+            common_vendor.index.removeStorageSync("line");
+            setTimeout(() => {
+              common_vendor.index.reLaunch({
+                url: "/pages/index/index"
+              });
+              clearTimeout();
+            }, 1e3);
+          } else {
+            resolve(res.data);
+          }
         } else {
           let userInfo = common_vendor.index.getStorageSync("userInfo");
-          common_vendor.index.__f__("log", "at util/request.js:42", userInfo, "userInfo");
+          common_vendor.index.__f__("log", "at util/request.js:58", userInfo, "userInfo");
           if (userInfo && Object.keys(userInfo).length == 0 || !userInfo) {
             common_vendor.index.showModal({
               title: "提示",
@@ -81,24 +97,18 @@ const request = (params) => {
               });
               break;
             case 500:
-              if (res.data.error == "请先登录") {
-                common_vendor.index.reLaunch({
-                  url: "/pages/index/index"
-                });
-                break;
-              } else {
-                common_vendor.index.showToast({
-                  title: res.data.error,
-                  icon: "none",
-                  mask: true
-                });
-                break;
-              }
+              common_vendor.index.showToast({
+                title: res.data.error,
+                icon: "none",
+                mask: true
+              });
+              break;
           }
         }
       },
       fail(err) {
-        common_vendor.index.__f__("log", "at util/request.js:125", err);
+        debugger;
+        common_vendor.index.__f__("log", "at util/request.js:135", err);
         if (err.errMsg.indexOf("request:fail") !== -1) {
           common_vendor.index.showToast({
             title: "网络异常",

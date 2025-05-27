@@ -36,7 +36,23 @@ export default (params) => {
         // 根据返回的状态码做出对应的操作
         //获取成功
         if (res.statusCode == 200) {
-          resolve(res.data);
+          if (res.data.code == 402) {
+            uni.showToast({
+              title: '登录过期，请重新登陆',
+              icon: "none",
+              mask: true,
+            });
+            uni.removeStorageSync("userInfo");
+            uni.removeStorageSync("line");
+            setTimeout(() => {
+              uni.reLaunch({
+                url: "/pages/index/index",
+              });
+              clearTimeout()
+            }, 1000)
+          } else {
+            resolve(res.data);
+          }
         } else {
           let userInfo = uni.getStorageSync("userInfo");
           console.log(userInfo, "userInfo");
@@ -89,19 +105,12 @@ export default (params) => {
               });
               break;
             case 500:
-              if (res.data.error == "请先登录") {
-                uni.reLaunch({
-                  url: "/pages/index/index",
-                });
-                break;
-              } else {
-                uni.showToast({
-                  title: res.data.error,
-                  icon: "none",
-                  mask: true,
-                });
-                break;
-              }
+              uni.showToast({
+                title: res.data.error,
+                icon: "none",
+                mask: true,
+              });
+              break;
             default:
               // uni.removeStorageSync("userInfo");
               // uni.showModal({
@@ -122,6 +131,7 @@ export default (params) => {
         }
       },
       fail(err) {
+        debugger
         console.log(err);
         if (err.errMsg.indexOf("request:fail") !== -1) {
           uni.showToast({
